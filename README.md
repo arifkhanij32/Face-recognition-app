@@ -148,7 +148,7 @@ pip install  dlib
 
 Download the Files from here... Then Open command prompt (cmd) in the same folder where the file is located. Type in cmd...
 
-pip install (copy file name and paste here) 
+pip install dlib-19.19.0-cp37-cp37m-win_amd64.whl
 
 Step-3 
 pip install face-recognition
