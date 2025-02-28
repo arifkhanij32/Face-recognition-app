@@ -15,17 +15,19 @@
             <button type="submit">Upload Image</button>
         </form>
 
+  {% if message %}
+            <p class="success">{{ message }}</p>
+        {% elif error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+
         <h2>Upload Video for Face Matching</h2>
         <form action="/video" method="POST" enctype="multipart/form-data">
             <input type="file" name="video" accept="video/*" required>
             <button type="submit">Upload Video</button>
         </form>
 
-        {% if message %}
-            <p class="success">{{ message }}</p>
-        {% elif error %}
-            <p class="error">{{ error }}</p>
-        {% endif %}
+      
     </div>
 </body>
 </html>
