@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from database import db, app, User
+from database import db, app, UserDetail
 from face_recognition_utils import store_face_encoding, detect_and_compare
 import base64
 import os
@@ -41,7 +41,7 @@ def video():
     matched_name, snapshot_path = detect_and_compare(video_path)
 
     if matched_name:
-        user = User.query.filter_by(name=matched_name).first()
+        user = UserDetail.query.filter_by(name=matched_name).first()
         snapshot_encoded = base64.b64encode(open(snapshot_path, "rb").read()).decode("utf-8")
 
         return render_template("result.html", name=user.name, image=snapshot_encoded)

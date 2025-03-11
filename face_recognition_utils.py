@@ -3,7 +3,7 @@ import numpy as np
 import face_recognition  # Correct module import
 import pickle
 import os
-from database import db, User
+from database import db, UserDetail
 
 UPLOAD_FOLDER = "static/uploads/"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
@@ -21,7 +21,7 @@ def store_face_encoding(name, image_path):
         encoding = encodings[0]  # Take the first detected face
         encoded_data = pickle.dumps(encoding)  # Convert encoding to binary
 
-        new_user = User(name=name, image_data=open(image_path, "rb").read(), encoding=encoded_data)
+        new_user = UserDetail(name=name, image_data=open(image_path, "rb").read(), encoding=encoded_data)
         db.session.add(new_user)
         db.session.commit()
 
@@ -35,7 +35,7 @@ def store_face_encoding(name, image_path):
 # Function to detect and compare face from video
 def detect_and_compare(video_path):
     try:
-        known_encodings = {user.name: pickle.loads(user.encoding) for user in User.query.all()}
+        known_encodings = {user.name: pickle.loads(user.encoding) for user in UserDetail.query.all()}
         cap = cv2.VideoCapture(video_path)
         
         while cap.isOpened():
